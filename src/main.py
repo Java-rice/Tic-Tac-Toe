@@ -20,6 +20,7 @@ class mainpage(tk.Tk):
         self.wm_title("Tic Tac Toe")
         self.geometry("%dx%d+%d+%d" % (width, height, x, y))
         self.resizable(0,0)
+        self.iconbitmap("./src/Assets/icon.ico")
         
         #main-container        
         container =  customtkinter.CTkFrame(self)

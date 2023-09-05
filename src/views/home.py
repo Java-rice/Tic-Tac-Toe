@@ -1,6 +1,7 @@
 import tkinter as tk
 import customtkinter
 from PIL import Image, ImageTk
+from game import tboard
 
 
 class homepage(tk.Frame):
@@ -8,4 +9,3 @@ class homepage(tk.Frame):
         tk.Frame.__init__(self, parent)
         
         self.controller = controller
-        
