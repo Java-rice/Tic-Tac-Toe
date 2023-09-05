@@ -17,7 +17,6 @@ class startpage(tk.Frame):
         
         #font_styles
         self.font1 = ('Inter', 14, 'bold')
-        
         self.interface()
     
     def interface(self):
