@@ -41,4 +41,4 @@ class startpage(tk.Frame):
         self.exit_button.place(relx = 0.5, rely = 0.85, anchor = "center")
     
     def quit(self):
-        pass
+        self.controller.destroy()

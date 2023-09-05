@@ -25,22 +25,26 @@ class aboutpage(tk.Frame):
         self.bg_frame.pack()
         
         #title-image and title-text
-        self.about_image = customtkinter.CTkImage(light_image=Image.open("./src/Assets/logo.png"),dark_image=Image.open("./src/Assets/logo.png"),size=(100, 100))
+        self.upper_bar = customtkinter.CTkFrame(self.bg_frame, width=550, height = 4, fg_color=self.black)
+        self.upper_bar.place(relx = 0.5, rely = 0.03, anchor = "center")
+        self.about_image = customtkinter.CTkImage(light_image=Image.open("./src/Assets/nospacelogo.png"),dark_image=Image.open("./src/Assets/nospacelogo.png"),size=(91, 74))
         self.background_label = customtkinter.CTkLabel(self.bg_frame, image=self.about_image, text="")
-        self.background_label.place(x = 100, y = 40)
+        self.background_label.place(x = 100, y = 25)
         self.about = customtkinter.CTkLabel(self.bg_frame, text="About", font=self.font2, text_color=self.black)
-        self.about.place(x = 220, y = 70)
+        self.about.place(x = 220, y = 47)
+        self.lower_bar = customtkinter.CTkFrame(self.bg_frame, width=550, height = 4, fg_color=self.black)
+        self.lower_bar.place(relx = 0.5, rely = 0.15, anchor = "center")
         
         #what is tic-tac-toe
         self.what_is_TTT = customtkinter.CTkLabel(self.bg_frame, text="What is Tic Tac Toe?", font=self.font3, text_color=self.black)
-        self.what_is_TTT.place(x = 110, y = 150)
+        self.what_is_TTT.place(x = 110, y = 140)
         self.TTT_text = customtkinter.CTkTextbox(self.bg_frame, wrap="word",font=self.font1,width=400, height=120, text_color=self.black, bg_color="transparent", fg_color="transparent")
-        self.TTT_text.place(x = 100, y = 180)
+        self.TTT_text.place(x = 100, y = 170)
         self.TTT_text.insert("0.0",text="Tic-Tac-Toe, also known as Noughts and Crosses, is a classic two-player strategy game typically played on a 3x3 grid. The objective of the game is for one player to form a line of three of their own symbols (either 'X' or 'O') horizontally, vertically, or diagonally, before the opponent does.")
         
         #instructions
         self.inst_label = customtkinter.CTkLabel(self.bg_frame, text="Instructions", font=self.font3, text_color=self.black)
-        self.inst_label.place(x = 110, y = 300)
+        self.inst_label.place(x = 110, y = 290)
         
         
         #return_to_welcome
