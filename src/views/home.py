@@ -1,7 +1,7 @@
 import tkinter as tk
 import customtkinter
 from PIL import Image, ImageTk
-from game import tboard
+from game import tboard, scoreboard
 from views import welcome
 
 
@@ -24,7 +24,10 @@ class homepage(tk.Frame):
         self.font4 = ('Inter', 14, 'bold')
         self.title = str()
         self.interface()
-    
+        self._cells = {}
+        tboard.TTBoard(self)
+        scoreboard.SCBoard(self)
+        
     def interface(self):
         self.mainframe = customtkinter.CTkFrame(self, width=600, height = 700, fg_color = "#FFF9E1")
         self.mainframe.pack()
@@ -41,11 +44,11 @@ class homepage(tk.Frame):
         
         #buttons
         self.button_container = customtkinter.CTkFrame(self.mainframe, fg_color="transparent", bg_color="transparent")
-        self.button_container.place(relx=0.5, rely=0.8, anchor="center")
+        self.button_container.place(relx=0.5, rely=0.91, anchor="center")
         self.reset_button = customtkinter.CTkButton(self.button_container,text = "Reset",  text_color=self.bg, height=37, corner_radius=50, font=self.font1, width = 200,bg_color=self.bg, fg_color=self.blue, command=self.reset_progress)
         self.return_button = customtkinter.CTkButton(self.button_container, height=37,text = "Return",  text_color=self.bg, width = 200, corner_radius=50, font=self.font1,bg_color=self.bg, fg_color=self.blue, command= lambda: self.controller.show_frame(welcome.startpage))
-        self.reset_button.pack()
-        self.return_button.pack()
+        self.reset_button.pack(side="left", padx=5)
+        self.return_button.pack(side="left", padx=5)
 
     def reset_progress():
         pass

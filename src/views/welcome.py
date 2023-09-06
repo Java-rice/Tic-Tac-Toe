@@ -3,6 +3,7 @@ import tkinter as tk
 import customtkinter
 from PIL import Image, ImageTk
 from views import about, home
+from game import tboard
 
 class startpage(tk.Frame):
     def __init__(self, parent, controller):
