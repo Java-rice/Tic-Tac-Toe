@@ -45,9 +45,9 @@ class startpage(tk.Frame):
         self.controller.destroy()
     
     def two(self):
-        home.homepage.title = "Multiplayer"
+        print(home.homepage.background_label)
         self.controller.show_frame(home.homepage)
         
     def one(self):
-        home.homepage.title = "Single Player"
+        self.title = "Single Player"
         self.controller.show_frame(home.homepage)
