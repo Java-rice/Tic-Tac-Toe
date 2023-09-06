@@ -30,8 +30,8 @@ class startpage(tk.Frame):
         self.background_label = tk.Label(self.bg_frame, image=self.background_image)
         self.background_label.place(x = 0, y = 0, relwidth = 1, relheight = 1)
         
-        self.oneplayer_button = customtkinter.CTkButton(self.bg_frame,text = "One Player", text_color=self.bg,  height=37, corner_radius=50, font=self.font1,width = 200,bg_color=self.bg, fg_color=self.blue)
-        self.twoplayer_button = customtkinter.CTkButton(self.bg_frame,text = "Two Player",  text_color=self.bg, height=37, corner_radius=50, font=self.font1,width = 200,bg_color=self.bg, fg_color=self.blue, command= lambda: self.controller.show_frame(home.homepage))
+        self.oneplayer_button = customtkinter.CTkButton(self.bg_frame,text = "One Player", text_color=self.bg,  height=37, corner_radius=50, font=self.font1,width = 200,bg_color=self.bg, fg_color=self.blue, command=self.one)
+        self.twoplayer_button = customtkinter.CTkButton(self.bg_frame,text = "Two Player",  text_color=self.bg, height=37, corner_radius=50, font=self.font1,width = 200,bg_color=self.bg, fg_color=self.blue, command=self.two)
         self.instructions_button = customtkinter.CTkButton(self.bg_frame,text = "Instructions",  text_color=self.bg, height=37, corner_radius=50, font=self.font1, width = 200,bg_color=self.bg, fg_color=self.black, command= lambda: self.controller.show_frame(about.aboutpage))
         self.exit_button = customtkinter.CTkButton(self.bg_frame, height=37,text = "Quit",  text_color=self.bg, width = 200, corner_radius=50, font=self.font1,bg_color=self.bg, fg_color=self.red, command=self.quit)
         
@@ -42,3 +42,11 @@ class startpage(tk.Frame):
     
     def quit(self):
         self.controller.destroy()
+    
+    def two(self):
+        home.homepage.title = "Multiplayer"
+        self.controller.show_frame(home.homepage)
+        
+    def one(self):
+        home.homepage.title = "Single Player"
+        self.controller.show_frame(home.homepage)
