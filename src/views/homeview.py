@@ -11,7 +11,7 @@ def interface(self):
     self.upper_bar.place(relx = 0.5, rely = 0.03, anchor = "center")
     self.about_image = customtkinter.CTkImage(light_image=Image.open("./src/Assets/nospacelogo.png"),dark_image=Image.open("./src/Assets/nospacelogo.png"),size=(91, 74))
     self.background_label = customtkinter.CTkLabel(self.mainframe, image=self.about_image, text="")
-    self.background_label.place(x = 100, y = 25)
+    self.background_label.place(x = 95, y = 25)
     self.lower_bar = customtkinter.CTkFrame(self.mainframe, width=550, height = 4, fg_color=self.black)
     self.lower_bar.place(relx = 0.5, rely = 0.15, anchor = "center")
 
