@@ -2,7 +2,7 @@
 import tkinter as tk
 import customtkinter
 from PIL import Image, ImageTk
-from views import about, home
+from views import about, singleplayer, multiplayer
 from game import tboard
 
 class startpage(tk.Frame):
@@ -45,9 +45,7 @@ class startpage(tk.Frame):
         self.controller.destroy()
     
     def two(self):
-        print(home.homepage.background_label)
-        self.controller.show_frame(home.homepage)
-        
+        self.controller.show_frame(multiplayer.main_game)                        
+
     def one(self):
-        self.title = "Single Player"
-        self.controller.show_frame(home.homepage)
+        self.controller.show_frame(singleplayer.main_game)   

@@ -1,7 +1,7 @@
 import tkinter as tk 
 import customtkinter
 from PIL import Image, ImageTk
-from views import about, home, welcome
+from views import about, singleplayer, welcome, multiplayer
 
 
 class mainpage(tk.Tk):
@@ -28,7 +28,7 @@ class mainpage(tk.Tk):
         
         #frames
         self.frames = {}
-        for F in (welcome.startpage, about.aboutpage, home.homepage):
+        for F in (welcome.startpage, about.aboutpage, singleplayer.main_game, multiplayer.main_game):
             frame = F(container,self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
