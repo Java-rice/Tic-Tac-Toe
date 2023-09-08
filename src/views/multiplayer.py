@@ -26,7 +26,7 @@ class main_game(tk.Frame):
         self.font6 = ('Inter', 18)
         
         #interface
-        self.text = "Multiplayer"
+        self.text = "Multiplayer Mode"
         homeview.interface(self)
         self.mainmode = customtkinter.CTkLabel(self.mainframe, text=self.text, font=self.font2, text_color=self.black)
         self.mainmode.place(relx = 0.5, rely = 0.09, anchor = "center")
