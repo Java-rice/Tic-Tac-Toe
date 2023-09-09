@@ -3,7 +3,6 @@ import customtkinter
 from PIL import Image, ImageTk
 from views import about, singleplayer, welcome, multiplayer
 
-
 class mainpage(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)

@@ -1,8 +1,19 @@
 import tkinter as tk
 import customtkinter
 from PIL import Image, ImageTk
-from game import tboard, scoreboard, roundlabel
+from game import tboard, scoreboard, roundlabel, mainlogic
 from views import welcome, homeview
+from typing import NamedTuple
+
+
+class Player(NamedTuple):
+    pick: str
+    color: str
+    
+class Move(NamedTuple):
+    row: int
+    col: int
+    label: str = ""
 
 class main_game(tk.Frame):
     
@@ -10,24 +21,12 @@ class main_game(tk.Frame):
         tk.Frame.__init__(self, parent)
         
         self.controller = controller
-
-        #color_varibles
-        self.blue = "#004AAD"
-        self.red = "#FF3131"
-        self.black = "#1E1E1E"
-        self.bg = "#FFF9E1"
-        
-        #font_styles
-        self.font1 = ('Inter', 14)
-        self.font2 = ('Inter', 24, 'bold')
-        self.font3 = ('Inter', 20, 'bold')
-        self.font4 = ('Inter', 14, 'bold')
-        self.font5 = ('Inter', 32, 'bold')
-        self.font6 = ('Inter', 18)
+        homeview.interface(self)
         
         #interface
         self.text = "Multiplayer Mode"
-        homeview.interface(self)
+        self.board_size = 3
+        self.default_players = (Player(pick="X", color=self.red), Player(pick="Y", color=self.blue))
         self.mainmode = customtkinter.CTkLabel(self.mainframe, text=self.text, font=self.font2, text_color=self.black)
         self.mainmode.place(relx = 0.5, rely = 0.09, anchor = "center")
         
@@ -39,3 +38,7 @@ class main_game(tk.Frame):
     
     def reset_progress():
         pass
+        
+        
+    
+    

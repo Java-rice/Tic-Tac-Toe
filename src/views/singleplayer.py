@@ -10,20 +10,6 @@ class main_game(tk.Frame):
         tk.Frame.__init__(self, parent)
         
         self.controller = controller
-
-        #color_varibles
-        self.blue = "#004AAD"
-        self.red = "#FF3131"
-        self.black = "#1E1E1E"
-        self.bg = "#FFF9E1"
-        
-        #font_styles
-        self.font1 = ('Inter', 14)
-        self.font2 = ('Inter', 24, 'bold')
-        self.font3 = ('Inter', 20, 'bold')
-        self.font4 = ('Inter', 14, 'bold')
-        self.font5 = ('Inter', 32, 'bold')
-        self.font6 = ('Inter', 18)
         
         #interface
         self.text = "Single Player Mode"
