@@ -1,5 +1,6 @@
 import customtkinter
-import tkinter as tk 
+import tkinter as tk
+from views import multiplayer 
 
 
 def TTBoard(self):

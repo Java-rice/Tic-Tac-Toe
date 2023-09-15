@@ -15,7 +15,10 @@ class Move(NamedTuple):
     col: int
     label: str = ""
 
+
 class main_game(tk.Frame):
+    Board_Size = 3
+    Default_Players = (Player(pick="X", color="#FF3131"), Player(pick="Y", color="#004AAD"))
     
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -25,17 +28,45 @@ class main_game(tk.Frame):
         
         #interface
         self.text = "Multiplayer Mode"
-        self.board_size = 3
-        self.default_players = (Player(pick="X", color=self.red), Player(pick="Y", color=self.blue))
         self.mainmode = customtkinter.CTkLabel(self.mainframe, text=self.text, font=self.font2, text_color=self.black)
         self.mainmode.place(relx = 0.5, rely = 0.09, anchor = "center")
+        self.start_game()
+
         
-        #logic
-        self._cells = {}
-        tboard.TTBoard(self)
-        scoreboard.SCBoard(self)
-        roundlabel.Round(self)
+        #Function to StartGame
+            #--Initial Players 0-0
+            #--Restart Board
+            #--Create Board
+            
+            #--Start Round
+                #Game Proper
+                #If-anyone-wins
+                    #Update scoreboard
+                    #Restart Board
+                    #function to next round
+                #clicks-reset
+                    #Reset Player Scoreboard
+                    #Reset Board
+                    #function to StartGame            
     
+    def start_game(self):
+        scoreboard.SCBoard(self) #Create ScoreBoard
+        
+        
+        
+        self._cells = {}
+        tboard.TTBoard(self) #Create Board
+        roundlabel.Round(self) #Create RoundBoard
+        
+        self.player1 += 1
+        
+        
+        
+        
+        
+        
+        
+        
     def reset_progress():
         pass
         
