@@ -1,13 +1,6 @@
 import customtkinter
 import tkinter as tk 
 
-def SCBoard(self):
-    self.player1 = 0
-    self.player2 = 0
-    self.label1 = "Player 1: "
-    self.label2 = "Player 2: "
-    scoreinterface(self)
-
 def scoreinterface(self):
     #scoreboard frame and label
     self.scoreboard = customtkinter.CTkFrame(master=self, width=500, height=75, border_width=2, border_color=self.black, fg_color=self.bg, bg_color=self.bg)

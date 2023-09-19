@@ -50,15 +50,19 @@ class main_game(tk.Frame):
                     #function to StartGame            
     
     def start_game(self):
-        scoreboard.SCBoard(self) #Create ScoreBoard
-        
-        
+        self.player1 = 0
+        self.player2 = 0
+        self.label1 = "Player 1: "
+        self.label2 = "Player 2: "
+        scoreboard.scoreinterface(self) #Create ScoreBoard
         
         self._cells = {}
         tboard.TTBoard(self) #Create Board
         roundlabel.Round(self) #Create RoundBoard
         
         self.player1 += 1
+        
+        scoreboard.scoreinterface(self)
         
         
         
