@@ -1,10 +1,10 @@
 import tkinter as tk
 import customtkinter
-from PIL import Image, ImageTk
-from game import tboard, scoreboard, roundlabel, mainlogic
+from game import tboard, scoreboard, roundlabel
 from views import welcome, homeview
 from typing import NamedTuple
 from itertools import cycle
+from PIL import Image, ImageTk
 
 class Player(NamedTuple):
     pick: str
@@ -18,6 +18,7 @@ class Move(NamedTuple):
 class main_game(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        self.controller = controller
 
         homeview.interface(self)
 
@@ -25,52 +26,66 @@ class main_game(tk.Frame):
         self.text = "Multiplayer Mode"
         self.mainmode = customtkinter.CTkLabel(self.mainframe, text=self.text, font=self.font2, text_color=self.black)
         self.mainmode.place(relx=0.5, rely=0.09, anchor="center")
-        
-        #Start the Game
-        self.start_game()
-        
-    def start_game(self):
-        #initialization
-        self.playerX = 0
-        self.playerY = 0
-        Board_Size = 3
-        Default_Players = (
-            Player(pick="X", color="#FF3131"),
-            Player(pick="Y", color="#004AAD"),
-        )
-        self.start_round(Board_Size,Default_Players)
 
-    def start_round(self,board_size,players):
-        self._cells = {}
-        self.players = cycle(players)
-        self.board_size = board_size
-        self.turn_player = next(self.players)
-        self.winner_combo = []
-        self.current_moves = []
-        self._haswinner = False
-        self.winning_combo = []
-        
-        scoreboard.scoreinterface(self)  # Create ScoreBoard
-        tboard.TTBoard(self.board_size)  # Create Board
-        roundlabel.Round(self)  # Create RoundBoard
-    
-    def _get_winning_combos(self):
-        rows = [
-            [(move.row, move.col) for move in row]
-            for row in self._current_moves
-        ]
-        columns = [list(col) for col in zip(*rows)]
-        first_diagonal = [row[i] for i, row in enumerate(rows)]
-        second_diagonal = [col[j] for j, col in enumerate(reversed(columns))]
-        return rows + columns + [first_diagonal, second_diagonal]
-    
-    def setup_board(self):
-        self.current_moves = [
-            [Move(row, col) for col in range(self.board_size)]
-            for row in range(self.board_size)
-        ]
-        self._winning_combos = self._get_winning_combos()
-    
-    
-    def reset_progress():
+        # Game variables
+        self.current_player = cycle([
+            ['Player 1', "./src/Assets/X.png"],
+            ['Player 2', "./src/Assets/O.png"]
+        ])
+        self.game_board = [[None for _ in range(3)] for _ in range(3)]
+        self.buttons_clicked = [[False for _ in range(3)] for _ in range(3)]  # Track buttons clicked
+
+        self.create_board()
+
+    def create_board(self):
+        boardframe = customtkinter.CTkFrame(master=self, fg_color=self.bg)
+        boardframe.place(relx=0.5, rely=0.5, anchor="center")
+
+        for row in range(3):
+            self.rowconfigure(row, weight=1, minsize=50)
+            self.columnconfigure(row, weight=1, minsize=75)
+
+            for col in range(3):
+                button = customtkinter.CTkButton(
+                    master=boardframe,
+                    text="",
+                    font=self.font1,
+                    fg_color=self.black,
+                    image="",
+                    width=100,
+                    height=100,
+                    bg_color=self.black,
+                    command=lambda row1=row, col1=col: self.on_button_click(row1, col1)
+                )
+                self.game_board[row][col] = button  # Store the button in the game board
+                button.grid(row=row, column=col, padx=2, pady=2, sticky="nsew")
+
+    def on_button_click(self, row, col):
+        button = self.game_board[row][col]
+        if not self.buttons_clicked[row][col]:  # Check if the button has been clicked
+            current_player = next(self.current_player)
+            image_path = Image.open(current_player[1])
+            ctk_image = customtkinter.CTkImage(light_image=image_path, dark_image=image_path,size=(50, 50))
+            button.configure(image=ctk_image)
+            button.image = ctk_image
+            self.game_board[row][col] = current_player[0]
+            self.buttons_clicked[row][col] = True  # Set the button as clicked
+            if self.check_winner(row, col, current_player[0]):
+                self.show_winner(current_player[0])
+            elif all(all(cell is not None for cell in row) for row in self.game_board):
+                self.show_winner('Draw')
+
+    def check_winner(self, row, col, player):
+        # Example of winning conditions for a 3x3 tic-tac-toe game
+        return (
+            self.game_board[row][0] == self.game_board[row][1] == self.game_board[row][2] == player or
+            self.game_board[0][col] == self.game_board[1][col] == self.game_board[2][col] == player or
+            self.game_board[0][0] == self.game_board[1][1] == self.game_board[2][2] == player or
+            self.game_board[0][2] == self.game_board[1][1] == self.game_board[2][0] == player
+        )
+
+
+    def show_winner(self, player):
+        winner = f"{player} wins!" if player != 'Draw' else "It's a draw!"
+        # Show winner or draw message - Implement as needed
         pass

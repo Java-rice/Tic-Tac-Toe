@@ -57,7 +57,6 @@ def interface(self):
         width=200,
         bg_color=self.bg,
         fg_color=self.blue,
-        command=self.reset_progress,
     )
     self.return_button = customtkinter.CTkButton(
         self.button_container,
