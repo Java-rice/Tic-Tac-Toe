@@ -19,10 +19,6 @@ class main_game(tk.Frame):
         )
         self.mainmode.place(relx=0.5, rely=0.09, anchor="center")
 
-        # logic
-        self._cells = {}
-        tboard.TTBoard(self)
-        roundlabel.Round(self)
 
     def reset_progress():
         pass

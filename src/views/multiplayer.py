@@ -6,20 +6,13 @@ from typing import NamedTuple
 from itertools import cycle
 from PIL import Image, ImageTk
 
-class Player(NamedTuple):
-    pick: str
-    color: str
-
-class Move(NamedTuple):
-    row: int
-    col: int
-    label: str = ""
-
+#main_game class
 class main_game(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        self.controller = controller
+        self.controller = controller 
 
+        # Label Inteface
         homeview.interface(self)
 
         # Top Title
@@ -32,11 +25,19 @@ class main_game(tk.Frame):
             ['Player 1', "./src/Assets/X.png"],
             ['Player 2', "./src/Assets/O.png"]
         ])
+        
+        # Triggers start game
+        self.start_game()
+        
+    def reset_game(self):
         self.game_board = [[None for _ in range(3)] for _ in range(3)]
-        self.buttons_clicked = [[False for _ in range(3)] for _ in range(3)]  # Track buttons clicked
-
+        self.buttons_clicked = [[False for _ in range(3)] for _ in range(3)] # Track buttons clicked
+        
+    def start_game(self):
+        self.reset_game()
         self.create_board()
-
+        roundlabel.Round(self)  
+    
     def create_board(self):
         boardframe = customtkinter.CTkFrame(master=self, fg_color=self.bg)
         boardframe.place(relx=0.5, rely=0.5, anchor="center")
@@ -59,22 +60,24 @@ class main_game(tk.Frame):
                 )
                 self.game_board[row][col] = button  # Store the button in the game board
                 button.grid(row=row, column=col, padx=2, pady=2, sticky="nsew")
+                print(f"Button at ({row}, {col}): {button}")
 
     def on_button_click(self, row, col):
         button = self.game_board[row][col]
         if not self.buttons_clicked[row][col]:  # Check if the button has been clicked
             current_player = next(self.current_player)
             image_path = Image.open(current_player[1])
-            ctk_image = customtkinter.CTkImage(light_image=image_path, dark_image=image_path,size=(50, 50))
+            ctk_image = customtkinter.CTkImage(light_image=image_path, dark_image=image_path, size=(50, 50))
             button.configure(image=ctk_image)
             button.image = ctk_image
             self.game_board[row][col] = current_player[0]
             self.buttons_clicked[row][col] = True  # Set the button as clicked
             if self.check_winner(row, col, current_player[0]):
-                self.show_winner(current_player[0])
+                self.show_winner(current_player[0]) 
             elif all(all(cell is not None for cell in row) for row in self.game_board):
-                self.show_winner('Draw')
-
+                self.show_winner('Draw')  # If all cells are filled, and no winner, declare draw
+                
+    #CHECK IF ELEMENTS ARE SAME ON EVERY INDEX
     def check_winner(self, row, col, player):
         # Example of winning conditions for a 3x3 tic-tac-toe game
         return (
@@ -89,3 +92,12 @@ class main_game(tk.Frame):
         winner = f"{player} wins!" if player != 'Draw' else "It's a draw!"
         # Show winner or draw message - Implement as needed
         pass
+    
+    def reset_progress(self):
+        for row in range(3):
+            for col in range(3):
+                button = self.game_board[row][col]
+                button.configure(image="")  # Remove image from the button
+                button.image = None 
+                self.buttons_clicked[row][col] = False
+                self.game_board[row][col] = None

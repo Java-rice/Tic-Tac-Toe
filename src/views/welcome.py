@@ -89,6 +89,7 @@ class startpage(tk.Frame):
         self.controller.destroy()
 
     def two(self):
+        self.controller.frames[multiplayer.main_game].reset_game()
         self.controller.show_frame(multiplayer.main_game)
 
     def one(self):
